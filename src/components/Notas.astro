@@ -1,0 +1,95 @@
+---
+// src/components/Notas.astro
+const alumnosNotas = [
+    { id: 1, nombre: "Juan Pérez", notas: [8, 7, 9] },
+    { id: 2, nombre: "María García", notas: [4, 5, 3] },
+];
+
+const calcularPromedio = (notas: number[]): string => {
+    if (notas.length === 0) return "0.00"; // Devolvemos string siempre
+    const suma = notas.reduce((acc, nota) => acc + nota, 0);
+    return (suma / notas.length).toFixed(2);
+};
+---
+
+<tbody>
+    {alumnosNotas.map((alumno) => {
+        // Ahora 'promedioStr' es un string, y lo convertimos a número para la lógica de colores
+        const promedioStr = calcularPromedio(alumno.notas);
+        const promedioNum = parseFloat(promedioStr); 
+        
+        return (
+            <tr>
+                <td>{alumno.nombre}</td>
+                <td class="notas-lista">
+                    {alumno.notas.map(n => <span class="nota-tag">{n}</span>)}
+                </td>
+                <td class={promedioNum >= 7 ? "text-success" : "text-danger"}>
+                    {promedioStr}
+                </td>
+                <td>
+                    {promedioNum >= 7 ? "🟢 Aprobado" : "🔴 Desaprobado"}
+                </td>
+            </tr>
+        );
+    })}
+</tbody>
+    </table>
+
+    <div class="acciones">
+        <button class="btn-primary">Cargar Nueva Nota</button>
+        <button class="btn-secondary">Exportar Informe (Excel)</button>
+    </div>
+</div>
+
+<style>
+    .modulo-notas {
+        background: #1e2025;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid #333;
+    }
+    .modulo-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    .badge {
+        font-size: 0.7rem;
+        background: #444;
+        padding: 2px 8px;
+        border-radius: 10px;
+        color: #aaa;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #2a2d35; }
+    
+    .nota-tag {
+        background: #2d3039;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-right: 4px;
+        font-size: 0.9rem;
+    }
+
+    .text-success { color: #4ade80; font-weight: bold; }
+    .text-danger { color: #f87171; font-weight: bold; }
+
+    .acciones {
+        margin-top: 1.5rem;
+        display: flex;
+        gap: 10px;
+    }
+    button {
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+    button:hover { opacity: 0.8; }
+    .btn-primary { background: #883aea; color: white; }
+    .btn-secondary { background: #333; color: white; }
+</style>

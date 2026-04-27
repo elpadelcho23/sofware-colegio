@@ -1,17 +1,48 @@
 ---
-
+// 1. IMPORTACIÓN DE MÓDULOS
+// Cuando tus amigos creen un componente, solo deben importarlo aquí:
+import Layout from '../layouts/Layout.astro';
+import Asistencia from '../components/Asistencia.astro'; 
+import Notas from '../components/Notas.astro';
+// import ModuloDeAmigo from '../components/ModuloDeAmigo.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Panel Docente - Offline">
+	<main>
+		<h1>Gestión Escolar Modular</h1>
+		<p class="description">
+			Bienvenido al panel principal. Los módulos de abajo son independientes.
+		</p>
+
+		<section class="grid-modulos">
+			<div class="modulo-container">
+				<Asistencia />
+			</div>
+
+			<div class="modulo-container">
+				<Notas />
+			</div>
+
+			</section>
+	</main>
+</Layout>
+
+<style>
+	/* Estilos básicos para que el grid se vea bien en PC y Celular */
+	main {
+		margin: auto;
+		padding: 1rem;
+		max-width: calc(100% - 2rem);
+	}
+	.grid-modulos {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+	.modulo-container {
+		border: 1px solid #444;
+		border-radius: 8px;
+		padding: 1rem;
+		background: #13151a;
+	}
+</style>

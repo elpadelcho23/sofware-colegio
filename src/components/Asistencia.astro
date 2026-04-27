@@ -1,0 +1,44 @@
+---
+// Aquí podrías recibir datos de una DB más adelante
+const alumnos = [
+    { id: 1, nombre: "Juan Pérez", estado: "presente" },
+    { id: 2, nombre: "María García", estado: "ausente" },
+];
+---
+
+<div class="modulo-asistencia">
+    <h2>Control de Asistencia</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Alumno</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {alumnos.map((alumno) => (
+                <tr>
+                    <td>{alumno.nombre}</td>
+                    <td>
+                        <select class="estado-select">
+                            <option value="p" selected={alumno.estado === 'presente'}>Presente</option>
+                            <option value="a" selected={alumno.estado === 'ausente'}>Ausente</option>
+                        </select>
+                    </td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+    <button id="guardar-btn">Guardar en Local</button>
+</div>
+
+<style>
+    .modulo-asistencia {
+        background: #1e2025;
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: 0.8rem; border-bottom: 1px solid #333; }
+    button { background: var(--accent-light); color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; }
+</style>
