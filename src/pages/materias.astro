@@ -1,0 +1,39 @@
+---
+// src/pages/materias.astro
+import Navigation from '../components/Navigation.astro';
+import GestionMaterias from '../components/GestionMaterias.astro';
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Gestión de Materias | SGE</title>
+		<style>
+			body {
+				background-color: #13151a;
+				font-family: system-ui, sans-serif;
+				margin: 0;
+				color: white;
+			}
+			main {
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 0 1.5rem 2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<Navigation currentPath="/materias" />
+		
+		<main>
+			<h1>Administración de Cátedras</h1>
+			<p>Configurá las materias y asigná alumnos de la base de datos central.</p>
+			
+			<hr style="border: 0; border-top: 1px solid #333; margin: 2rem 0;" />
+
+			<GestionMaterias client:load />
+		</main>
+	</body>
+</html>
