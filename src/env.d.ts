@@ -7,3 +7,9 @@ declare module 'virtual:pwa-register' {
 
     export function registerSW(options?: RegisterSWOptions): void;
 }
+
+declare namespace App {
+    interface Locals {
+        user: import('./server/db').User | null;
+    }
+}
