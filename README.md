@@ -1,43 +1,29 @@
-# Astro Starter Kit: Minimal
+# Aula Clara - Gestion Escolar Astro
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Aplicacion web para docentes construida con Astro. Incluye registro de alumnos, toma de asistencia, carga de notas, calculo automatico de promedios y seguimiento de rendimiento.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  components/
+  db/schema.sql
+  layouts/Layout.astro
+  pages/
+  scripts/school-app.js
+  styles/global.css
+docs/arquitectura.md
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Comandos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Comando | Accion |
+| :-- | :-- |
+| `npm install` | Instala dependencias |
+| `npm run dev` | Inicia el servidor local en `localhost:4321` |
+| `npm run build` | Genera la version de produccion |
+| `npm run preview` | Previsualiza el build |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Base de datos
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+El esquema relacional esta en `src/db/schema.sql`. La version actual funciona en navegador con `localStorage` para facilitar pruebas inmediatas. Para backend real con SQLite, ver `docs/arquitectura.md`.

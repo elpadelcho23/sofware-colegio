@@ -1,35 +1,32 @@
 import { defineConfig } from 'astro/config';
-import { VitePWA } from 'vite-plugin-pwa';
+import node from '@astrojs/node';
+import { fileURLToPath } from 'node:url';
+
+const astroPrerenderEntry = fileURLToPath(
+  new URL('./node_modules/astro/dist/entrypoints/prerender.js', import.meta.url),
+);
+const ariaQueryStub = fileURLToPath(new URL('./src/server/stubs/aria-query.js', import.meta.url));
+const axobjectQueryStub = fileURLToPath(new URL('./src/server/stubs/axobject-query.js', import.meta.url));
 
 export default defineConfig({
-  integrations: [], // Aquí van tus otras integraciones si tenés
+  output: 'server',
+  devToolbar: {
+    enabled: false,
+  },
+  adapter: node({
+    mode: 'standalone',
+  }),
   vite: {
-    plugins: [
-      VitePWA({
-        registerType: 'autoUpdate',
-        manifest: {
-          name: 'Software Escolar Cole...',
-          short_name: 'EscolarApp',
-          description: 'Gestión de asistencia y notas offline para docentes',
-          theme_color: '#ffffff',
-          icons: [
-            {
-              src: 'pwa-192x192.png', // Deberás crear estos iconos en /public
-              sizes: '192x192',
-              type: 'image/png'
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png'
-            }
-          ]
-        },
-        workbox: {
-          // Esto asegura que todos tus archivos .astro y assets se guarden en caché
-          globPatterns: ['**/*.{js,css,html,ico,png,svg}']
-        }
-      })
-    ]
-  }
+    optimizeDeps: {
+      noDiscovery: true,
+      include: [],
+    },
+    resolve: {
+      alias: {
+        'astro/entrypoints/prerender': astroPrerenderEntry,
+        'aria-query': ariaQueryStub,
+        'axobject-query': axobjectQueryStub,
+      },
+    },
+  },
 });
